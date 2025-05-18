@@ -1,0 +1,15 @@
+services:
+  host-app:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+
+    # 標準入力を開く
+    stdin_open: true
+
+    # 仮想端末を有効にする
+    tty: true
