@@ -1,0 +1,47 @@
+{
+  "name": "next-pusher-sample",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc"
+  },
+  "dependencies": {
+    "lucide-react": "^0.511.0",
+    "next": "15.3.2",
+    "next-themes": "^0.4.6",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "@chakra-ui/next-js": "^2.4.2",
+    "@chakra-ui/react": "^3.19.1",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@eslint/eslintrc": "^3",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "cookie": "^1.0.2",
+    "cookies-next": "^6.0.0",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "framer-motion": "^12.15.0",
+    "postcss": "^8.5.3",
+    "react-hook-form": "^7.56.4",
+    "react-redux": "^9.2.0",
+    "redux": "^5.0.1",
+    "sass": "^1.89.0",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5"
+  }
+}
