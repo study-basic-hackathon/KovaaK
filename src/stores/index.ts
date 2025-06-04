@@ -1,10 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { roomReducer } from "../reducers/roomReducer";
+import { roomReducer } from "../reducers/room-reducer";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { answerReducer } from "@/reducers/answer-reducer";
+import { guessReducer } from "@/reducers/guess-reducer";
 
 export const store = configureStore({
   reducer: {
     roomInfo: roomReducer,
+    answers: answerReducer,
+    guesses: guessReducer,
   },
 });
 

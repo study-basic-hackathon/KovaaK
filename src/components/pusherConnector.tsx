@@ -3,9 +3,13 @@
 import { useAppDispatch } from "@/stores";
 import { useEffect } from "react";
 import { useCookieStore } from "./cookie/useCookieValue";
-import { addMembers, removeMembers } from "@/reducers/roomReducer";
+import { addMembers, removeMembers } from "@/reducers/room-reducer";
 import { pusherClient } from "@/libs/pusher/client";
 import { Members } from "pusher-js";
+import { AnswerData } from "@/app/api/answer/route";
+import { addAnswer } from "@/reducers/answer-reducer";
+import { addGuess } from "@/reducers/guess-reducer";
+import { GuessData } from "@/app/api/guess/route";
 
 export function PusherConnector() {
   const dispatch = useAppDispatch();
@@ -31,7 +35,14 @@ export function PusherConnector() {
     const privateChannel = pusherClient(userName).subscribe(
       `private-${roomName}`
     );
-    console.log(`channelに接続しました。${privateChannel.name}`);
+
+    privateChannel.bind("evt::answered", (answer: AnswerData) => {
+      dispatch(addAnswer(answer));
+    });
+
+    privateChannel.bind("evt::guessed", (guess: GuessData) => {
+      dispatch(addGuess(guess));
+    });
 
     const presenceChannel = pusherClient(userName).subscribe(
       "presence-common_room"

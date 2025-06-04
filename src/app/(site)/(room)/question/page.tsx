@@ -1,60 +1,25 @@
 "use client";
-import {
-  Box,
-  Container,
-  Center,
-  VStack,
-  Bleed,
-  Button,
-} from "@chakra-ui/react";
-import { FC, useEffect, useState } from "react";
+import { useAppSelector } from "@/stores";
+import { useRouter } from "next/navigation";
+import { FC, Suspense, useEffect } from "react";
+import QuestionAnswerForm from "./components/question-answer-form";
 
 const Question: FC = () => {
-  const [question, setQuestion] = useState(null);
-  const [choices, setChoices] = useState([]);
+  const { members } = useAppSelector((state) => state.roomInfo);
+  const { answers } = useAppSelector((state) => state.answers);
+  const router = useRouter();
 
   useEffect(() => {
-    (async () => {
-      const data = await fetch("/api/question", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const json = await data.json();
-      setQuestion(json.question);
-      setChoices(json.choices);
-    })();
-  }, []);
+    if (answers.length >= members.length) {
+      console.log("回答が出揃いました！");
+      router.push("/guess");
+    }
+  }, [answers]);
 
   return (
-    <Container>
-      <Box h={100}>
-        <Center h="100%">
-          <Bleed>{question}</Bleed>
-        </Center>
-      </Box>
-
-      <Box h={400}>
-        <Center h="100%">
-          <VStack w={200}>
-            {choices.map((choice, index) => (
-              <Button
-                key={index}
-                w="100%"
-                p="4"
-                bg="teal"
-                color="white"
-                textAlign={"center"}
-              >
-                {choice}
-              </Button>
-            ))}
-          </VStack>
-        </Center>
-      </Box>
-    </Container>
+    <Suspense fallback={<p>...loading</p>}>
+      <QuestionAnswerForm />
+    </Suspense>
   );
 };
 
