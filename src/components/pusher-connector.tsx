@@ -45,7 +45,7 @@ export function PusherConnector() {
     });
 
     const presenceChannel = pusherClient(userName).subscribe(
-      "presence-common_room"
+      `presence-${roomName}`
     );
 
     presenceChannel.bind(

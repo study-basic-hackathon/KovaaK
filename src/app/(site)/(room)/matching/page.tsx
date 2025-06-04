@@ -13,6 +13,7 @@ import {
 import { useRouter } from "next/navigation";
 
 const Matching: FC = () => {
+  const roomNameCookie = useCookieStore("roomName");
   const { members } = useAppSelector((state) => state.roomInfo);
   const router = useRouter();
 
@@ -22,6 +23,12 @@ const Matching: FC = () => {
 
   return (
     <Container>
+      <Box h={100}>
+        <Center h="100%">
+          <Bleed>部屋のあいことば: {roomNameCookie.getValue()}</Bleed>
+        </Center>
+      </Box>
+
       <Box h={100}>
         <Center h="100%">
           <Bleed>ゆーざーいちらん</Bleed>

@@ -9,6 +9,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import RoomCreateForm from "./components/room-create-form";
+import RoomJoinForm from "./components/room-join-form";
 
 const Top: FC = () => {
   const RoomCreateDialog = (
@@ -52,7 +53,9 @@ const Top: FC = () => {
           <Dialog.Header>
             <Dialog.Title>ルーム参加</Dialog.Title>
           </Dialog.Header>
-          <Dialog.Body />
+          <Dialog.Body>
+            <RoomJoinForm />
+          </Dialog.Body>
           <Dialog.Footer />
         </Dialog.Content>
       </Dialog.Positioner>

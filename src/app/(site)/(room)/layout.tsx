@@ -1,7 +1,7 @@
 "use client";
 import { FC, Suspense } from "react";
 import { Provider } from "@/components/ui/provider";
-import { PusherConnector } from "@/components/pusherConnector";
+import { PusherConnector } from "@/components/pusher-connector";
 
 type RoomLayoutProps = {
   children: React.ReactNode;
