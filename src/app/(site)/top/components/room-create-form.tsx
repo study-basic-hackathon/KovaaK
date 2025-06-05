@@ -1,4 +1,6 @@
 import { useCookieStore } from "@/components/cookie/useCookieValue";
+import { setRoomName } from "@/reducers/room-reducer";
+import { useAppDispatch } from "@/stores";
 import { Button, Field, Input, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
@@ -9,9 +11,9 @@ interface FormValues {
 }
 
 const RoomCreateForm: FC = () => {
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const userNameCookie = useCookieStore("userName");
-  const roomNameCookie = useCookieStore("roomName");
 
   const {
     register,
@@ -23,7 +25,8 @@ const RoomCreateForm: FC = () => {
     console.log(data);
 
     userNameCookie.setValue(data.userName);
-    roomNameCookie.setValue("hoge");
+    // TODO: ルーム名を自動生成
+    dispatch(setRoomName("hoge"));
 
     router.push("/matching");
   });

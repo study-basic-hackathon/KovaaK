@@ -1,4 +1,6 @@
 import { useCookieStore } from "@/components/cookie/useCookieValue";
+import { setRoomName } from "@/reducers/room-reducer";
+import { useAppDispatch } from "@/stores";
 import { Button, Field, Input, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
@@ -11,8 +13,8 @@ interface FormValues {
 
 const RoomJoinForm: FC = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const userNameCookie = useCookieStore("userName");
-  const roomNameCookie = useCookieStore("roomName");
 
   const {
     register,
@@ -38,7 +40,7 @@ const RoomJoinForm: FC = () => {
       const { occupied } = await res.json();
       if (occupied) {
         userNameCookie.setValue(data.userName);
-        roomNameCookie.setValue(data.roomName);
+        dispatch(setRoomName(data.roomName));
 
         router.push("/matching");
       }

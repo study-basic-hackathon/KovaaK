@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
 import { useCookieStore } from "@/components/cookie/useCookieValue";
+import { useAppSelector } from "@/stores";
 
 export interface GuessFormProps {
   question: string;
@@ -21,8 +22,8 @@ interface FormValues {
 }
 
 const GuessForm: FC<GuessFormProps> = ({ question, choices }) => {
+  const { roomName } = useAppSelector((state) => state.roomInfo);
   const userNameCookie = useCookieStore("userName");
-  const roomNameCookie = useCookieStore("roomName");
 
   const {
     control,
@@ -31,7 +32,6 @@ const GuessForm: FC<GuessFormProps> = ({ question, choices }) => {
   } = useForm<FormValues>();
 
   const onSubmit = handleSubmit(async (formData) => {
-    const roomName = roomNameCookie.getValue();
     const userName = userNameCookie.getValue();
 
     const otherInfo = {

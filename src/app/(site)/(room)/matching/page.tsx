@@ -1,6 +1,5 @@
 "use client";
 import { FC, useEffect, useState } from "react";
-import { useCookieStore } from "@/components/cookie/useCookieValue";
 import { useAppSelector } from "@/stores";
 import {
   Bleed,
@@ -11,21 +10,36 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+import { RoomCondition } from "@/types/room-condition";
 
 const Matching: FC = () => {
-  const roomNameCookie = useCookieStore("roomName");
-  const { members } = useAppSelector((state) => state.roomInfo);
+  const { roomName, roomCondition, members } = useAppSelector(
+    (state) => state.roomInfo
+  );
   const router = useRouter();
 
-  const onClick = () => {
-    router.push("/question");
+  useEffect(() => {
+    if (roomCondition === RoomCondition.Progressing) {
+      router.push("/question");
+    }
+  }, [roomCondition]);
+
+  const onClick = async () => {
+    const body = { roomName: roomName };
+    const res = await fetch("/api/room/start", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
   };
 
   return (
     <Container>
       <Box h={100}>
         <Center h="100%">
-          <Bleed>部屋のあいことば: {roomNameCookie.getValue()}</Bleed>
+          <Bleed>部屋のあいことば: {roomName}</Bleed>
         </Center>
       </Box>
 

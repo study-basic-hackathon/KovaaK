@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { Dispatch, FC, SetStateAction } from "react";
 import {
   Box,
   Container,
@@ -11,16 +11,21 @@ import {
 import { Controller, useForm } from "react-hook-form";
 import { QuestionData } from "@/app/api/question/route";
 import { useCookieStore } from "@/components/cookie/useCookieValue";
+import { useAppSelector } from "@/stores";
 
 let questionData: QuestionData | undefined;
+
+type QuestionAnswerFormProps = {
+  setIsWaiting: Dispatch<SetStateAction<boolean>>;
+};
 
 interface FormValues {
   answer: string;
 }
 
-const QuestionAnswerForm: FC = () => {
+const QuestionAnswerForm: FC<QuestionAnswerFormProps> = ({ setIsWaiting }) => {
+  const { roomName } = useAppSelector((state) => state.roomInfo);
   const userNameCookie = useCookieStore("userName");
-  const roomNameCookie = useCookieStore("roomName");
   const fetchQuestionData = async (): Promise<QuestionData> => {
     const res = await fetch("/api/question", {
       method: "GET",
@@ -42,7 +47,6 @@ const QuestionAnswerForm: FC = () => {
   } = useForm<FormValues>();
 
   const onSubmit = handleSubmit(async (formData) => {
-    const roomName = roomNameCookie.getValue();
     const userName = userNameCookie.getValue();
 
     const otherInfo = {
@@ -55,6 +59,8 @@ const QuestionAnswerForm: FC = () => {
     const data = { ...otherInfo, ...formData };
     console.log("回答送信");
     console.log("%o", data);
+
+    setIsWaiting(true);
 
     await fetch("/api/answer", {
       method: "POST",
