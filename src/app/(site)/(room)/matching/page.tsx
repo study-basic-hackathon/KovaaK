@@ -39,14 +39,14 @@ const Matching: FC = () => {
     <div className="matching-container">
       <style jsx>{`
         .matching-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 16px;
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
           min-height: 100vh;
-          background: #ffffff;
+          background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #f3e8ff 100%);
           position: relative;
           overflow: hidden;
+          width: 100vw;
+          margin: 0;
+          padding: 0;
         }
 
         /* 歩いている人のアニメーション背景 */
@@ -259,125 +259,196 @@ const Matching: FC = () => {
         .main-content {
           position: relative;
           z-index: 1;
-        }
-
-        .section {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .section-room-code,
-        .section-title,
-        .section-button {
-          height: 100px;
-        }
-
-        .section-members {
-          height: 400px;
-        }
-
-        .center-content {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100%;
-          width: 100%;
-        }
-
-        .room-code-text {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1a202c;
-          text-align: center;
-          padding: 16px 32px;
-          background: #fed7aa;
-          border-radius: 12px;
-          border: 2px solid #fdba74;
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .user-list-title {
-          font-size: 1.375rem;
-          font-weight: 600;
-          color: #1a202c;
-          text-align: center;
-          text-shadow: none;
-        }
-
-        .members-stack {
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          width: 280px;
-          max-height: 350px;
-          overflow-y: auto;
-          padding: 8px;
+          align-items: center;
+          gap: 40px;
+          padding: 40px 16px 20px;
+          max-width: 1200px;
+          margin: 0 auto;
         }
 
-        .members-stack::-webkit-scrollbar {
-          width: 6px;
-        }
-
-        .members-stack::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 3px;
-        }
-
-        .members-stack::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 3px;
-        }
-
-        .member-box {
+        /* ヘッダー */
+        .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           width: 100%;
-          padding: 18px 24px;
-          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-          color: #1a202c;
-          text-align: center;
-          border-radius: 12px;
+          margin-bottom: 20px;
+        }
+
+        .top-link {
+          font-size: 1rem;
           font-weight: 600;
+          color: #374151;
+          text-decoration: none;
+        }
+
+        .github-icon {
+          width: 24px;
+          height: 24px;
+          fill: #374151;
+        }
+
+        /* ロゴセクション */
+        .logo-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          margin-bottom: 20px;
+        }
+
+        .logo-container {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .logo-icon {
+          width: 60px;
+          height: 60px;
+          background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 24px;
+          font-weight: bold;
+        }
+
+        .logo-text {
+          font-size: 2.5rem;
+          font-weight: 800;
+          background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .subtitle {
           font-size: 1.1rem;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+          color: #6b7280;
+          text-align: center;
+          max-width: 600px;
+        }
+
+        /* カードコンテナ */
+        .cards-container {
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+          width: 100%;
+          max-width: 800px;
+        }
+
+        /* ルーム情報カード */
+        .room-info-card {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border-radius: 24px;
+          padding: 32px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          text-align: center;
+        }
+
+        .room-code-display {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1f2937;
+          margin-bottom: 8px;
+        }
+
+        .room-code-value {
+          font-size: 2rem;
+          font-weight: 800;
+          background: linear-gradient(135deg, #f59e0b 0%, #ec4899 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        /* メンバーカード */
+        .members-card {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border-radius: 24px;
+          padding: 32px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .members-title {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1f2937;
+          text-align: center;
+          margin-bottom: 24px;
+        }
+
+        .members-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 16px;
+          max-height: 300px;
+          overflow-y: auto;
+        }
+
+        .member-item {
+          background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+          color: #1f2937;
+          padding: 16px 20px;
+          border-radius: 16px;
+          font-weight: 600;
+          text-align: center;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
           transition: all 0.3s ease;
           position: relative;
           overflow: hidden;
-          cursor: pointer;
         }
 
-        .member-box::before {
+        .member-item::before {
           content: "";
           position: absolute;
           top: 0;
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
           transition: left 0.5s ease;
         }
 
-        .member-box:hover {
+        .member-item:hover {
           transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .member-box:hover::before {
+        .member-item:hover::before {
           left: 100%;
+        }
+
+        /* スタートボタン */
+        .start-button-container {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
         }
 
         .start-button {
           background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
           color: white;
           border: none;
-          padding: 16px 48px;
-          font-size: 1.125rem;
-          font-weight: 600;
-          border-radius: 12px;
+          padding: 18px 48px;
+          font-size: 1.25rem;
+          font-weight: 700;
+          border-radius: 20px;
           cursor: pointer;
           transition: all 0.3s ease;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-          text-transform: uppercase;
-          letter-spacing: 1px;
+          box-shadow: 0 8px 24px rgba(236, 72, 153, 0.3);
+          text-transform: none;
+          letter-spacing: 0.5px;
           position: relative;
           overflow: hidden;
         }
@@ -394,8 +465,8 @@ const Matching: FC = () => {
         }
 
         .start-button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+          transform: translateY(-3px);
+          box-shadow: 0 12px 32px rgba(236, 72, 153, 0.4);
         }
 
         .start-button:hover::before {
@@ -403,33 +474,32 @@ const Matching: FC = () => {
         }
 
         .start-button:active {
-          transform: translateY(0);
+          transform: translateY(-1px);
         }
 
         /* レスポンシブデザイン */
         @media (max-width: 768px) {
           .matching-container {
-            padding: 0 12px;
+            padding: 16px 12px;
           }
 
-          .members-stack {
-            width: 100%;
-            max-width: 320px;
+          .logo-text {
+            font-size: 2rem;
           }
 
-          .room-code-text {
-            font-size: 1.25rem;
-            padding: 12px 20px;
+          .logo-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
           }
 
-          .section-room-code,
-          .section-title,
-          .section-button {
-            height: 80px;
+          .room-info-card,
+          .members-card {
+            padding: 24px;
           }
 
-          .section-members {
-            height: 350px;
+          .members-grid {
+            grid-template-columns: 1fr;
           }
 
           .walking-person {
@@ -454,23 +524,17 @@ const Matching: FC = () => {
         }
 
         @media (max-width: 480px) {
-          .room-code-text {
-            font-size: 1rem;
-            padding: 10px 16px;
+          .logo-text {
+            font-size: 1.75rem;
           }
 
-          .member-box {
-            padding: 14px 18px;
+          .subtitle {
             font-size: 1rem;
           }
 
           .start-button {
-            padding: 12px 32px;
-            font-size: 1rem;
-          }
-
-          .user-list-title {
-            font-size: 1.25rem;
+            padding: 16px 36px;
+            font-size: 1.125rem;
           }
 
           .walking-person {
@@ -498,34 +562,49 @@ const Matching: FC = () => {
 
       {/* メインコンテンツ */}
       <div className="main-content">
-        <div className="section section-room-code">
-          <div className="center-content">
-            <div className="room-code-text">部屋のあいことば: {roomName}</div>
-          </div>
+        {/* ヘッダー */}
+        <div className="header">
+          <a href="#" className="top-link">
+            TOP
+          </a>
+          <svg className="github-icon" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+          </svg>
         </div>
 
-        <div className="section section-title">
-          <div className="center-content">
-            <div className="user-list-title">ユーザー一覧</div>
+        {/* ロゴセクション */}
+        <div className="logo-section">
+          <div className="logo-container">
+            <div className="logo-icon">👥</div>
+            <h1 className="logo-text">High5</h1>
           </div>
+          <p className="subtitle">みんなで回答を推測しあって、アイスブレイクを楽しみましょう</p>
         </div>
 
-        <div className="section section-members">
-          <div className="center-content">
-            <div className="members-stack">
+        {/* カードコンテナ */}
+        <div className="cards-container">
+          {/* ルーム情報カード */}
+          <div className="room-info-card">
+            <div className="room-code-display">部屋のあいことば</div>
+            <div className="room-code-value">{roomName}</div>
+          </div>
+
+          {/* メンバーカード */}
+          <div className="members-card">
+            <h2 className="members-title">参加メンバー</h2>
+            <div className="members-grid">
               {members.map((member, index) => (
-                <div key={index} className="member-box">
+                <div key={index} className="member-item">
                   {member}
                 </div>
               ))}
             </div>
           </div>
-        </div>
 
-        <div className="section section-button">
-          <div className="center-content">
+          {/* スタートボタン */}
+          <div className="start-button-container">
             <button className="start-button" onClick={onClick}>
-              Start
+              ゲームを開始する
             </button>
           </div>
         </div>
@@ -535,3 +614,4 @@ const Matching: FC = () => {
 }
 
 export default Matching
+
