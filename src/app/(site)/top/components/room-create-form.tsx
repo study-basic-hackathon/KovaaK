@@ -5,6 +5,7 @@ import { Button, Field, Input, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
+import { createUniqueRoomId } from "src/features/createRoomId"
 
 interface FormValues {
   userName: string;
@@ -25,8 +26,9 @@ const RoomCreateForm: FC = () => {
     console.log(data);
 
     userNameCookie.setValue(data.userName);
-    // TODO: ルーム名を自動生成
-    dispatch(setRoomName("hoge"));
+    // ルーム名を重複しないように自動生成
+    const roomId = await createUniqueRoomId();
+    dispatch(setRoomName(roomId));
 
     router.push("/matching");
   });
