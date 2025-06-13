@@ -1,0 +1,252 @@
+/* 全体のスタイル */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN", "Yu Gothic",
+    "メイリオ", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #fce8f3 0%, #e9e0ff 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+}
+
+/* カードのスタイル */
+.result-card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ユーザー結果のヘッダー */
+.user-result {
+  margin-bottom: 25px;
+}
+
+.username-label {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e94e9c;
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.username-label:after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7eb6 0%, #8c65f6 100%);
+  border-radius: 3px;
+}
+
+/* セクションタイトル */
+.section-title {
+  font-size: 18px;
+  color: #6a6a6a;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* みんなの推測セクション */
+.guesses-section {
+  margin-bottom: 25px;
+  overflow: hidden; /* はみ出した要素を隠す */
+}
+
+.guesses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guess-item {
+  background-color: #f0f5ff;
+  border-radius: 15px;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #4a4a4a;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+  opacity: 0; /* 初期状態は非表示 */
+  transform: translateX(-100%); /* 左から開始 */
+  animation-name: slideIn;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* スライドインアニメーション */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.guess-item:hover {
+  transform: translateY(-2px);
+}
+
+/* 回答セクション */
+.answer-section {
+  margin-bottom: 30px;
+}
+
+.answer {
+  background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  border-radius: 15px;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: pulsate 2s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(255, 154, 158, 0.5);
+}
+
+/* アニメーションのキーフレーム */
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 154, 158, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+  }
+}
+
+/* 星のアニメーション用スタイル */
+.star {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+@keyframes starFloat {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* キラキラエフェクト */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: white;
+  opacity: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* 次へボタン */
+.next-button {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+  width: 80%;
+  margin: 0 auto;
+}
+
+.next-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(118, 75, 162, 0.4);
+}
+
+.next-button:active {
+  transform: translateY(1px);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 480px) {
+  .result-card {
+    padding: 20px;
+  }
+
+  .username-label {
+    font-size: 20px;
+  }
+
+  .section-title {
+    font-size: 16px;
+  }
+
+  .guess-item {
+    font-size: 14px;
+  }
+
+  .answer {
+    font-size: 16px;
+  }
+
+  .next-button {
+    font-size: 16px;
+    padding: 12px 30px;
+  }
+}

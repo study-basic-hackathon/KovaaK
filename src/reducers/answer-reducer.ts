@@ -15,6 +15,7 @@ const answerSlice = createSlice({
   reducers: {
     addAnswer: (state, action: PayloadAction<AnswerData>) => {
       state.answers = [...state.answers, action.payload];
+      state.answers.sort();
     },
     resetAnswers: (state, action) => {
       state.answers = [];
