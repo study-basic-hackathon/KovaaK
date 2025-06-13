@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FC, Suspense, useEffect, useState } from "react";
 import QuestionAnswerForm from "./components/question-answer-form";
 import { Rings } from "react-loader-spinner";
-import { Text } from "@chakra-ui/react";
+import { Container, Box, Center, Text } from "@chakra-ui/react";
 
 const Question: FC = () => {
   const { members } = useAppSelector((state) => state.roomInfo);
@@ -14,19 +14,28 @@ const Question: FC = () => {
 
   useEffect(() => {
     if (answers.length >= members.length) {
-      console.log("回答が出揃いました！");
       router.push("/guess");
     }
   }, [answers]);
 
   return (
     <Suspense fallback={<p>...loading</p>}>
-      {!isWaiting && <QuestionAnswerForm setIsWaiting={setIsWaiting} />}
+      {!isWaiting && (
+        <QuestionAnswerForm
+          setIsWaiting={setIsWaiting}
+          membersCount={members.length}
+          answersCount={answers.length}
+        />
+      )}
       {isWaiting && (
-        <>
-          <Rings />
-          <Text>皆の回答待ち</Text>
-        </>
+        <Container>
+          <Box h="100vh">
+            <Center h="100%">
+              <Rings />
+              <Text>皆の回答待ち</Text>
+            </Center>
+          </Box>
+        </Container>
       )}
     </Suspense>
   );
