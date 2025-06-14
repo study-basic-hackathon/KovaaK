@@ -1,11 +1,12 @@
-"use client"
-import { type FC, useState } from "react"
-import RoomCreateForm from "./components/room-create-form"
-import RoomJoinForm from "./components/room-join-form"
+"use client";
+import { type FC, useState } from "react";
+import RoomCreateForm from "./components/room-create-form";
+import RoomJoinForm from "./components/room-join-form";
+import "./styles.css";
 
 const Top: FC = () => {
-  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
-  const [isJoinDialogOpen, setIsJoinDialogOpen] = useState(false)
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isJoinDialogOpen, setIsJoinDialogOpen] = useState(false);
 
   return (
     <div className="app-container">
@@ -44,7 +45,9 @@ const Top: FC = () => {
               </svg>
             </div>
             <h3 className="card-title">ルーム作成</h3>
-            <p className="card-description">新しいルームを作って、友達を招待しよう！</p>
+            <p className="card-description">
+              新しいルームを作って、友達を招待しよう！
+            </p>
             <div className="card-detail">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
                 <path
@@ -54,7 +57,10 @@ const Top: FC = () => {
               </svg>
               <span>最大8人まで参加可能</span>
             </div>
-            <button className="action-button create-button" onClick={() => setIsCreateDialogOpen(true)}>
+            <button
+              className="action-button create-button"
+              onClick={() => setIsCreateDialogOpen(true)}
+            >
               ルームを作成する
             </button>
           </div>
@@ -63,18 +69,31 @@ const Top: FC = () => {
           <div className="action-card">
             <div className="card-icon join-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z" fill="white" />
+                <path
+                  d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"
+                  fill="white"
+                />
               </svg>
             </div>
             <h3 className="card-title">ルーム参加</h3>
-            <p className="card-description">友達のルームに参加して、一緒に楽しもう！</p>
+            <p className="card-description">
+              友達のルームに参加して、一緒に楽しもう！
+            </p>
             <div className="card-detail">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#666" strokeWidth="2" fill="none" />
+                <path
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke="#666"
+                  strokeWidth="2"
+                  fill="none"
+                />
               </svg>
               <span>ルームコードで簡単参加</span>
             </div>
-            <button className="action-button join-button" onClick={() => setIsJoinDialogOpen(true)}>
+            <button
+              className="action-button join-button"
+              onClick={() => setIsJoinDialogOpen(true)}
+            >
               ルームに参加する
             </button>
           </div>
@@ -92,13 +111,18 @@ const Top: FC = () => {
               </svg>
             </div>
             <h4 className="feature-title">楽しいゲーム</h4>
-            <p className="feature-description">みんなで楽しめる楽しいゲームがいっぱい</p>
+            <p className="feature-description">
+              みんなで楽しめる楽しいゲームがいっぱい
+            </p>
           </div>
 
           <div className="feature">
             <div className="feature-icon users-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" fill="#2196F3" />
+                <path
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  fill="#2196F3"
+                />
               </svg>
             </div>
             <h4 className="feature-title">新しい出会い</h4>
@@ -119,11 +143,17 @@ const Top: FC = () => {
 
       {/* Create Room Dialog */}
       {isCreateDialogOpen && (
-        <div className="dialog-overlay" onClick={() => setIsCreateDialogOpen(false)}>
+        <div
+          className="dialog-overlay"
+          onClick={() => setIsCreateDialogOpen(false)}
+        >
           <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
             <div className="dialog-header">
               <h2 className="dialog-title">ルーム作成</h2>
-              <button className="close-button" onClick={() => setIsCreateDialogOpen(false)}>
+              <button
+                className="close-button"
+                onClick={() => setIsCreateDialogOpen(false)}
+              >
                 ✕
               </button>
             </div>
@@ -136,11 +166,17 @@ const Top: FC = () => {
 
       {/* Join Room Dialog */}
       {isJoinDialogOpen && (
-        <div className="dialog-overlay" onClick={() => setIsJoinDialogOpen(false)}>
+        <div
+          className="dialog-overlay"
+          onClick={() => setIsJoinDialogOpen(false)}
+        >
           <div className="dialog-content" onClick={(e) => e.stopPropagation()}>
             <div className="dialog-header">
               <h2 className="dialog-title">ルーム参加</h2>
-              <button className="close-button" onClick={() => setIsJoinDialogOpen(false)}>
+              <button
+                className="close-button"
+                onClick={() => setIsJoinDialogOpen(false)}
+              >
                 ✕
               </button>
             </div>
@@ -150,312 +186,8 @@ const Top: FC = () => {
           </div>
         </div>
       )}
-
-      <style jsx>{`
-        .app-container {
-          min-height: 100vh;
-          background: linear-gradient(120deg, #ffeede 0%, #f7eaff 60%, #f6f0ff 100%);
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-          padding: 0;
-          margin: 0;
-          position: relative;
-          overflow: hidden;
-        }
-        .icebreaker-logo-bg {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin-top: 38px;
-          margin-bottom: 18px;
-          position: relative;
-        }
-        .icebreaker-logo-bg::before {
-          content: '';
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-          width: 340px;
-          height: 90px;
-          border-radius: 60px;
-          background: linear-gradient(90deg, #ffe0b2 0%, #f7eaff 100%);
-          filter: blur(18px) brightness(1.08);
-          opacity: 0.38;
-          z-index: 0;
-        }
-        .icebreaker-logo {
-          position: relative;
-          z-index: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .logo {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 18px;
-        }
-        .logo-icon.big {
-          width: 72px;
-          height: 72px;
-          background: linear-gradient(135deg, #d665e0 0%, #ffb6b9 100%);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 24px rgba(214, 101, 224, 0.18);
-        }
-        .logo-text.big {
-          font-size: 3.1rem;
-          font-weight: 900;
-          margin: 0;
-          letter-spacing: 2px;
-          line-height: 1;
-        }
-        .pink-text {
-          color: #e84cbf;
-          text-shadow: 0 2px 12px #ffd6e0;
-        }
-        .purple-text {
-          color: #5f6ff3;
-          text-shadow: 0 2px 12px #e0e7ff;
-        }
-        .main-content {
-          max-width: 900px;
-          margin: 0 auto;
-          padding: 0 20px;
-          position: relative;
-          z-index: 1;
-        }
-        .subtitle {
-          text-align: center;
-          font-size: 1.25rem;
-          color: #6d5cae;
-          margin: 18px 0 38px;
-          line-height: 1.7;
-          font-weight: 600;
-          text-shadow: 0 2px 8px #f8e7f8;
-        }
-        .action-cards {
-          display: flex;
-          flex-direction: row;
-          gap: 32px;
-          justify-content: center;
-          margin-bottom: 48px;
-        }
-        .action-card {
-          background: linear-gradient(120deg, #fff 60%, #fff7fa 100%);
-          border-radius: 18px;
-          padding: 38px 18px 32px;
-          text-align: center;
-          box-shadow: 0 4px 18px rgba(214, 101, 224, 0.10), 0 2px 8px rgba(0,0,0,0.04);
-          border: 1.5px solid #f3eaff;
-          min-width: 340px;
-          max-width: 380px;
-        }
-        .card-icon.create-icon {
-          width: 64px;
-          height: 64px;
-          background: linear-gradient(135deg, #ff8fa3 0%, #ffb86b 100%);
-          margin: 0 auto 18px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          box-shadow: 0 2px 8px rgba(255, 105, 180, 0.13);
-        }
-        .card-icon.join-icon {
-          width: 64px;
-          height: 64px;
-          background: linear-gradient(135deg, #a8a4ff 0%, #7fdfff 100%);
-          margin: 0 auto 18px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          box-shadow: 0 2px 8px rgba(105, 180, 255, 0.13);
-        }
-        .card-title {
-          font-size: 1.45rem;
-          font-weight: 900;
-          color: #222;
-          margin: 0 0 10px;
-        }
-        .card-description {
-          font-size: 1.02rem;
-          color: #444;
-          margin: 0 0 14px;
-          line-height: 1.6;
-        }
-        .card-detail {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-          font-size: 0.98rem;
-          color: #a78bfa;
-          margin-bottom: 22px;
-        }
-        .action-button.create-button {
-          background: linear-gradient(90deg, #f47cc3 0%, #ffb86b 100%);
-          color: #fff;
-          font-weight: 700;
-          font-size: 1.08rem;
-          box-shadow: 0 2px 8px #ffd6e0;
-        }
-        .action-button.join-button {
-          background: linear-gradient(90deg, #6e8fff 0%, #b18fff 100%);
-          color: #fff;
-          font-weight: 700;
-          font-size: 1.08rem;
-          box-shadow: 0 2px 8px #e0e7ff;
-        }
-        .action-button {
-          width: 95%;
-          min-height: 48px;
-          padding: 14px 0;
-          border: none;
-          border-radius: 18px;
-          cursor: pointer;
-          transition: all 0.3s cubic-bezier(.4,2,.6,1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .action-button:hover {
-          transform: translateY(-2px) scale(1.04);
-          box-shadow: 0 8px 24px rgba(214, 101, 224, 0.18);
-        }
-        .features {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 32px;
-          margin-bottom: 44px;
-        }
-        @media (max-width: 900px) {
-          .features {
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-          }
-        }
-        @media (max-width: 600px) {
-          .features {
-            grid-template-columns: 1fr;
-            gap: 16px;
-          }
-        }
-        .feature {
-          background: linear-gradient(120deg, #fff 70%, #e0e7ff 100%);
-          border-radius: 20px;
-          padding: 32px 18px 28px;
-          text-align: center;
-          box-shadow: 0 4px 20px rgba(123, 93, 214, 0.13);
-          border: 2px solid #e0e7ff;
-        }
-        .feature-icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 18px;
-          background: rgba(255, 255, 255, 0.95);
-        }
-        .heart-icon {
-          color: #ff3e8e;
-        }
-        .users-icon {
-          color: #5f3dc4;
-        }
-        .bolt-icon {
-          color: #ffd600;
-        }
-        .feature-title {
-          font-size: 1.18rem;
-          font-weight: 900;
-          color: #5f3dc4;
-          margin: 0 0 10px;
-        }
-        .feature-description {
-          font-size: 0.98rem;
-          color: #444;
-          margin: 0;
-          line-height: 1.5;
-        }
-        .dialog-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.5);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 1000;
-          backdrop-filter: blur(4px);
-        }
-        .dialog-content {
-          background: white;
-          border-radius: 22px;
-          max-width: 500px;
-          width: 92%;
-          max-height: 80vh;
-          overflow: auto;
-          box-shadow: 0 20px 60px rgba(123, 93, 214, 0.18);
-        }
-        .dialog-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 26px 26px 0;
-        }
-        .dialog-title {
-          font-size: 1.55rem;
-          font-weight: 800;
-          color: #7b5dd6;
-          margin: 0;
-        }
-        .close-button {
-          background: #f5f5f5;
-          border: none;
-          border-radius: 50%;
-          width: 34px;
-          height: 34px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          color: #666;
-          font-size: 1.1rem;
-          transition: all 0.2s ease;
-        }
-        .close-button:hover {
-          background: #e0e0e0;
-        }
-        .dialog-body {
-          padding: 26px;
-        }
-        @media (max-width: 900px) {
-          .main-content {
-            max-width: 100vw;
-          }
-          .action-cards {
-            flex-direction: column;
-            gap: 24px;
-            align-items: center;
-          }
-          .action-card {
-            min-width: 0;
-            width: 100%;
-            max-width: 420px;
-          }
-        }
-      `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default Top
+export default Top;
