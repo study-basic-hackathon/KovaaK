@@ -15,12 +15,13 @@ const guessSlice = createSlice({
   reducers: {
     addGuess: (state, action: PayloadAction<GuessData>) => {
       state.guesses = [...state.guesses, action.payload];
+      state.guesses.sort();
     },
-    resetGuesss: (state, action) => {
+    resetGuesses: (state) => {
       state.guesses = [];
     },
   },
 });
 
-export const { addGuess, resetGuesss } = guessSlice.actions;
+export const { addGuess, resetGuesses } = guessSlice.actions;
 export const guessReducer = guessSlice.reducer;

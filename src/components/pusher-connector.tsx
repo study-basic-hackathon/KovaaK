@@ -12,9 +12,11 @@ import { pusherClient } from "@/libs/pusher/client";
 import { Members } from "pusher-js";
 import { AnswerData } from "@/app/api/answer/route";
 import { addAnswer } from "@/reducers/answer-reducer";
-import { addGuess } from "@/reducers/guess-reducer";
+import { addGuess, resetGuesses } from "@/reducers/guess-reducer";
 import { GuessData } from "@/app/api/guess/route";
 import { RoomCondition } from "@/types/room-condition";
+import { GuessIncrementData } from "@/app/api/guess/increment/route";
+import { incrementGuess } from "@/reducers/guess-increment-reducer";
 
 export function PusherConnector() {
   const dispatch = useAppDispatch();
@@ -50,6 +52,14 @@ export function PusherConnector() {
     privateChannel.bind("evt::guessed", (guess: GuessData) => {
       dispatch(addGuess(guess));
     });
+
+    privateChannel.bind(
+      "evt::guessIncrement",
+      (guessIncrement: GuessIncrementData) => {
+        dispatch(incrementGuess(guessIncrement));
+        dispatch(resetGuesses());
+      }
+    );
 
     const presenceChannel = pusherClient(userName).subscribe(
       `presence-${roomName}`

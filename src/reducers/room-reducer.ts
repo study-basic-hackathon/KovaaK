@@ -25,6 +25,7 @@ const roomSlice = createSlice({
     },
     addMembers: (state, action: PayloadAction<string>) => {
       state.members = [...state.members, action.payload];
+      state.members.sort();
     },
     removeMembers: (state, action: PayloadAction<string>) => {
       state.members = state.members.filter(
